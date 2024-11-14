@@ -1,187 +1,107 @@
-# Project Overview
+# NomadCrew 🌍
 
-## Project Name
+[![Go Report Card](https://goreportcard.com/badge/github.com/NomadCrew/nomad-crew-backend)](https://goreportcard.com/report/github.com/NomadCrew/nomad-crew-backend)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-Nomad Crew
+NomadCrew is an open-source group travel coordination platform that combines real-time location sharing, expense tracking, and travel planning into a single, cohesive mobile application.
 
-## Description
+## Project Vision
+Traveling with friends should be about making memories, not managing apps. NomadCrew eliminates the need to switch between multiple applications for group coordination, expense splitting, and location sharing.
 
-An app designed for creating disposable groups for trips, featuring live location sharing, messaging, media sharing, and expense splitting.
+## Key Features
+- **Real-time Location Sharing**: Keep track of group members with live location updates
+- **Expense Management**: Split and track group expenses with ease
+- **Group Communication**: Integrated chat and media sharing
+- **Trip Planning**: Collaborative travel planning and itinerary management
 
-# System Architecture
+## Architecture
+NomadCrew follows a microservices architecture using modern cloud-native technologies:
 
-## 1. Frontend
+- **Backend**: Go (Golang)
+- **Frontend**: React Native
+- **Database**: PostgreSQL
+- **Cache**: Redis
+- **Message Queue**: RabbitMQ
+- **Infrastructure**: Kubernetes
 
-### Technology
-
-Ionic (VueJS) + Capacitor
-
-### Key Features
-
-- User authentication
-- Group creation and management interface
-- Live map with location tracking
-- Chat functionality
-- Media sharing capabilities
-- Expense management and splitting tool
-
-### Development Guidelines
-
-- Utilize VueJS's reactivity and Ionic's rich set of UI components for building a seamless user experience across web and mobile platforms.
-- Employ Capacitor to integrate native device features like geolocation and camera access in a cross-platform manner.
-- Focus on creating a responsive design that ensures a smooth, native-like experience on any device.
-- Prioritize security and privacy in features, especially in location sharing and in-app messaging, adhering to best practices.
-- Test extensively in a web environment to streamline development before compiling for Android or iOS platforms.
-
-## 2. Backend
-
-### Technology
-
-Go with gRPC for service communication
-
-### Services
-
-- **User Service:** Manages user authentication and profile settings.
-- **Group Service:** Handles group creation, joining, and administration.
-- **Location Service:** Provides live location tracking and sharing.
-- **Messaging Service:** Facilitates in-app messaging and media sharing.
-- **Media Service:** Manages uploading and access to shared media content.
-- **Expense Service:** Offers expense recording and splitting among group members.
-
-### Development Guidelines
-
-- Implement robust error handling and logging strategies for clarity and maintenance ease.
-- Use gRPC for fast, efficient communication between microservices, enhancing performance.
-- Adhere to RESTful principles for API design to ensure clarity and standardization.
-
-## 3. Database
-
-### Primary Database
-
-PostgreSQL
-
-### Caching and Real-time Data
-
-Redis
-
-### Schema Design
-
-Initial schema outlines for user profiles, groups, locations, messages, and expenses, incorporating the PostGIS extension for geospatial queries in PostgreSQL.
-
-### Development Guidelines
-
-- Maintain database normalization to ensure data integrity and consistency.
-- Apply appropriate indexing, particularly for location data, to improve query performance.
-
-## 4. Messaging and Event Streaming
-
-### Technology
-
-Apache Kafka
-
-### Usage
-
-- Streaming real-time location updates.
-- Managing chat and notification services efficiently.
-
-### Development Guidelines
-
-- Configure Kafka topics to segment data streams effectively.
-- Ensure system resilience and message persistence through fault-tolerant setups.
-
-## 5. Infrastructure
-
-### Containerization
-
-Docker
-
-### Orchestration
-
-Kubernetes, hosted on Google Cloud Platform (GCP)
-
-### CI/CD
-
-GitHub Actions integrated with JFrog Artifactory for artifact management
-
-### Monitoring and Logging
-
-Prometheus and Grafana for monitoring, Sentry for error tracking
-
-### Storage
-
-MinIO for object storage, particularly for media files
-
-### Development Guidelines
-
-- Create Dockerfiles for containerization, ensuring a consistent environment across development stages.
-- Utilize Kubernetes for deploying and managing microservices, focusing on scalability and reliability.
-- Establish CI/CD pipelines for automated testing and deployment, enhancing productivity and reliability.
-- Implement comprehensive monitoring and alerting with Prometheus and Grafana, alongside real-time error tracking with Sentry.
-
-# Coding Standards and Practices
-
-## Version Control
-
-Utilize Git with GitHub for source code management and collaboration.
-
-## Code Reviews
-
-Mandatory review process for all contributions to the main branch, ensuring code quality and consistency.
-
-## Documentation
-
-Maintain detailed documentation, including inline comments and service-specific README files, for clarity and collaboration.
-
-## Testing
-
-Comprehensive testing strategy, including unit and integration tests, to ensure reliability and functionality.
-
-## Security
-
-Adherence to OWASP security standards, emphasizing the safeguarding of user data and interactions.
-
-# Contribution Guidelines
+## Project Structure
+```
+nomad-crew/
+├── backend/
+│   ├── user-service/       # User management and authentication
+│   ├── trip-service/       # Trip and group management
+│   ├── location-service/   # Real-time location tracking
+│   ├── chat-service/       # Real-time messaging
+│   └── expense-service/    # Expense tracking and splitting
+├── mobile/                 # React Native mobile application
+├── infrastructure/         # Kubernetes and cloud configuration
+└── docs/                   # Documentation and architecture designs
+```
 
 ## Getting Started
 
-Instructions for setting up a local development environment, including necessary tools and configurations.
+### Prerequisites
+- Go 1.21+
+- Docker & Docker Compose
+- Node.js 18+
+- PostgreSQL 15+
+- Redis 7+
 
-## Issue Tracking
+### Local Development
+1. Clone the repository:
+```bash
+git clone https://github.com/NomadCrew/nomad-crew-backend.git
+```
 
-Clear guidelines for reporting bugs and feature requests, ensuring effective tracking and resolution.
+2. Set up environment variables:
+```bash
+cp .env.example .env
+```
 
-## Pull Requests
+3. Start required services:
+```bash
+docker-compose up -d
+```
 
-Outlined process for submitting changes, including branch naming conventions and review requirements.
+4. Run the backend:
+```bash
+cd backend
+make run
+```
 
-## Code of Conduct
+Detailed setup instructions can be found in our [Development Guide](docs/development.md).
 
-Established expectations for respectful and constructive contribution to foster a positive community.
+## Technical Documentation
+- [Architecture Overview](docs/architecture.md)
+- [API Documentation](docs/api.md)
+- [Development Guidelines](docs/development.md)
+- [Deployment Guide](docs/deployment.md)
 
-# Project Roadmap
+## Contributing
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a pull request.
 
-## Phase 1
+### Development Process
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Initial setup and implementation of core functionalities such as user authentication and group creation.
+## Building in Public
+This project is being built in public, with regular updates and technical discussions shared on:
+- [LinkedIn Development Journey](https://linkedin.com/in/yourusername)
+- [Architecture Decision Records](docs/adr)
+- [Project Blog](https://dev.to/yourusername)
 
-## Phase 2
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Development and integration of advanced features, including real-time location tracking and messaging.
+## Contact
+Project Lead - [Your Name](https://linkedin.com/in/yourusername)
 
-## Phase 3
+Project Link: [https://github.com/NomadCrew/nomad-crew-backend](https://github.com/NomadCrew/nomad-crew-backend)
 
-Expansion to include additional functionalities like media sharing and expense splitting.
+---
 
-## Phase 4
-
-Comprehensive testing across platforms, final optimizations, and deployment.
-
-# Contact and Support
-
-## Maintainers
-
-Contact information for project maintainers for direct support and inquiries.
-
-## Community
-
-Community engagement channels, such as Slack or Discord, for discussion, collaboration, and support.
+Built with ❤️ for travelers who love tech
